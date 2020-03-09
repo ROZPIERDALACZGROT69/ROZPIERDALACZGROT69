@@ -4,17 +4,17 @@
 
 using namespace std;
 
-Liczznaki(string zdanie){
+void Liczznaki(string zdanie){
 
 cout<<"Ilosc wszystkich znakow w zdaniu to: "<<(zdanie.size());
 
 }
 
-int Liczbezspacji(const string zdanie, const char znak=' ')
+void Liczbezspacji(const string zdanie, const char znak=' ')
         {
-                int iIloscZnakow = 0;
+                int i,iIloscZnakow = 0;
 
-                for(int i = 0; i < zdanie.length(); ++i)
+                for(i = 0; i < zdanie.length(); ++i)
                         {
                                 if(zdanie[i] != znak)
                                         {
@@ -24,13 +24,13 @@ int Liczbezspacji(const string zdanie, const char znak=' ')
                 cout<<iIloscZnakow;
         }
 
-int Liczbezpodanego(const string zdanie)
+void Liczbezpodanego(const string zdanie)
         {char znak;
          cout<<"Podaj znak do pominiecia: ";
          cin>>znak;
-                int iIloscZnakow = 0;
+                int i,iIloscZnakow = 0;
 
-                for(int i = 0; i < zdanie.length(); ++i)
+                for(i = 0; i < zdanie.length(); ++i)
                         {
                                 if(zdanie[i] != znak)
                                         {
@@ -39,6 +39,21 @@ int Liczbezpodanego(const string zdanie)
                         }
                 cout<<iIloscZnakow;
         }
+void Wyrazy(const string zdanie){
+    int i,dlugosc=zdanie.size();
+for(i=0; i<=dlugosc; i++)
+{
+    if(zdanie[i]==' ')
+    {
+        cout<<endl;
+    }
+    else
+        {
+            cout<<zdanie[i];
+        }
+}
+
+}
 
 int main()
 {string zdanie;
@@ -68,6 +83,7 @@ int wybor,powtorka;
   case 1: Liczznaki(zdanie); break;
   case 2: Liczbezspacji(zdanie); break;
   case 3: Liczbezpodanego(zdanie);break;
+  case 4: Wyrazy(zdanie); break;
 
     }
     cout<<endl;
