@@ -28,10 +28,11 @@ int main(){
     int n;
     cout << "wprowadz N: "<<endl;
     cin >> n;
-    osoba *tab;
+    osoba *tab = new osoba [n];
     wypelnianie(n,tab);
     delete tab;
 
     return 0;
 }
+
 
