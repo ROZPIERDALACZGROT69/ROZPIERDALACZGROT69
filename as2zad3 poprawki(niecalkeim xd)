@@ -1,0 +1,41 @@
+#include <iostream>
+#include <cstdlib>
+
+using namespace std;
+
+struct tosoba{
+int id;
+char imie[20];
+char nazwisko[20];
+int wiek;
+};
+
+void wypelnianie(int n,tosoba *tab){
+    int i;
+
+for (i=0; i<n; i++)
+    {
+        // pobieramy dane
+        cout<< "Podaj id tosoba numer " << i+1 << endl;
+        cin>>(*tab).id;
+        cout<< "Podaj imie tosoba numer " << i+1 << endl;
+        cin>>(*tab).imie;
+        cout<< "Podaj nazwisko tosoba numer " << i+1 << endl;
+        cin>>(*tab).nazwisko;
+        cout<< "Podaj wiek tosoba numer " << i+1 << endl;
+        cin>>(*tab).wiek;
+   }
+
+}
+
+int main()
+{int n;
+    cout << "wprowadz N: ";
+    cin >> n;
+    tosoba *tab;
+    wypelnianie(n, tab);
+
+    delete tab;
+
+    return 0;
+}
