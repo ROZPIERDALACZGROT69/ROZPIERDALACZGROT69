@@ -25,17 +25,22 @@ for (i=0; i<n; i++)
         cout<< "Podaj wiek tosoba numer " << i+1 << endl;
         cin>>(*tab).wiek;
    }
-
 }
 
 int main()
 {int n;
     cout << "wprowadz N: ";
     cin >> n;
-    tosoba *tab = new tosoba;
+    tosoba *tab=new tosoba;
     wypelnianie(n, tab);
+
+for(int i = 0; i < n; i++)
+    {
+        cout<<tab[i].imie << " " << tab[i].nazwisko << endl;
+    }
 
     delete tab;
 
     return 0;
 }
+
