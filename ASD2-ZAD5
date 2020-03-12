@@ -43,14 +43,12 @@ void odczyt (int n,osoba *tab ){
 
 void szukanie(osoba *tab, int n){
     int i;
-    char szukana;
-
+    char szukana[20];
     cout<<"Podaj element do wyszukania pozycji: ";
     cin>> szukana;
-
 for (int i=0; i<n; i++)
 {
-if (tab[i] == szukana)
+if (tab[i].imie == szukana)
 {
 cout << "Zadany element znajduje sie w tablicy pod indeksem: " << i << endl;
 }
@@ -69,9 +67,10 @@ int main(){
     osoba *tab = new osoba [n]  ;
     wypelnianie(n,tab);
     odczyt (n,tab);
-    szukanie(n,tab);
+    szukanie(tab,n);
 
     delete tab;
 
     return 0;
 }
+
