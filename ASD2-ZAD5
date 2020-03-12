@@ -1,0 +1,77 @@
+#include <iostream>
+#include <cstdlib>
+
+using namespace std;
+
+ struct osoba{
+int id;
+char imie[20];
+char nazwisko[20];
+int wiek;
+};
+
+void wypelnianie(int n,osoba *tab){
+    int i;
+    for (i=0; i<n; i++)
+    {
+     cout<< "Podaj id tosoba numer "<< i+1 << endl;
+     cin >> tab->id;
+     cout<< "Podaj imie tosoba numer " << i+1 << endl;
+     cin >> tab->imie;
+     cout<< "Podaj nazwisko tosoba numer " << i+1 << endl;
+     cin>>tab->nazwisko;
+     cout<< "Podaj wiek tosoba numer " << i+1 << endl;
+     cin>> tab->wiek;
+*tab++;
+    }
+}
+
+void odczyt (int n,osoba *tab ){
+  int i;
+    for (i=0; i<n; i++)
+        {
+         cout<<"Id: " << tab->id;
+         cout<<endl;
+         cout<<"Imie: " << tab->imie;
+         cout<<endl;
+         cout<<"Nazwisko: " << tab->nazwisko;
+         cout<<endl;
+         cout<<"Wiek: " << tab->wiek << endl;
+*tab++;
+        }
+}
+
+void szukanie(osoba *tab, int n){
+    int i;
+    char szukana;
+
+    cout<<"Podaj element do wyszukania pozycji: ";
+    cin>> szukana;
+
+for (int i=0; i<n; i++)
+{
+if (tab[i] == szukana)
+{
+cout << "Zadany element znajduje sie w tablicy pod indeksem: " << i << endl;
+}
+
+
+}
+}
+
+
+
+int main(){
+    int n;
+    cout << "Wprowadz N: "<<endl;
+    cin >> n;
+
+    osoba *tab = new osoba [n]  ;
+    wypelnianie(n,tab);
+    odczyt (n,tab);
+    szukanie(n,tab);
+
+    delete tab;
+
+    return 0;
+}
