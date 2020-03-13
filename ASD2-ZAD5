@@ -11,22 +11,18 @@ int wiek;
 };
 
 void wypelnianie(int n,osoba *tab){
-    int i;
+    int i,j,a,b;
     for (i=0; i<n; i++)
     {
-        do
-        {
-         cout<< "Podaj id tosoba numer "<< i+1 << endl;
-         cin >> tab->id;
-         cin.clear(); //kasowanie flagi błędu strumienia
-         cin.sync(); //kasowanie zbędnych znaków z bufora
-        } while(!(cin>>tab->id));
-
+     cout<< "Podaj id tosoba numer "<< i+1 << endl;
+     cin >> tab->id;
+  do{
      cout<< "Podaj imie tosoba numer " << i+1 << endl;
      cin >> tab->imie;
+     for(j=0;j<n-1;j++){a=(&tab[0]+j)->imie[j];}
+     }while(a>64 && a<123);
      cout<< "Podaj nazwisko tosoba numer " << i+1 << endl;
      cin>>tab->nazwisko;
-
      do
      {
       cout<< "Podaj wiek tosoba numer " << i+1 << endl;
@@ -71,4 +67,5 @@ int main(){
 
     return 0;
 }
+
 
