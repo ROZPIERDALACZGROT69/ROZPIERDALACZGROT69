@@ -1,0 +1,54 @@
+#include <iostream>
+
+using namespace std;
+
+void maximin(int tab[15]){
+ int mini,maksi=0,i,a,b;
+
+ for(i=0; i<15; i++)
+    {
+     if (mini>tab[i]) {mini=tab[i]; a=i;}
+     if (tab[i]>maksi) {maksi=tab[i]; b=i;}
+    }
+ cout << endl;
+ cout << "Najmniejsza liczba: " << mini  <<"\n Indeks: " << a << endl;
+ cout << "Najwieksza liczba: " << maksi  <<"\n Indeks: " << b << endl;
+}
+
+void srednia(int tab[15]){
+ int i,suma;
+
+ for(i=0;i<15;i++)
+ {
+     suma+=tab[i];
+ }
+ cout<<endl;
+ cout<<"Srednia wartosc tablicy: "<<suma/15<<endl;
+
+}
+
+void szukanko(int tab[15]){
+int wybor, pozycja;
+ cout<<endl;
+ cout << "Ktora pozycje chcesz zwrocic? ";
+ cin >> wybor;
+
+    wybor=wybor-1;
+    pozycja=tab[wybor];
+
+ cout<<"\n Wartosc pozycji: "<< pozycja <<endl;
+}
+
+int main()
+{int tab[15], i;
+    for(i=0; i<15; i++)
+    {
+     cout << "Podaj liczbe do tablicy " << i+1 << ": ";
+     cin >> tab[i];
+    }
+   maximin(tab);
+   srednia(tab);
+   szukanko(tab);
+
+    return 0;
+}
