@@ -1,0 +1,57 @@
+#include <iostream>
+
+using namespace std;
+
+void sumakiw(int tab[10][10],int n){
+ int i,j,l,m,suma1=0,suma2=0;
+
+ cout<<endl;
+ cout<<"Podaj kolumne do sumowania: ";
+ cin>>l;
+
+ for (i=0; i<n; i++)
+ {
+    suma1=suma1+tab[i][l-1];
+ }
+ cout<<"Suma "<<l; cout<<" wynosi: "<<suma1<<endl;
+
+ cout<<"Podaj wiersze do sumowania: ";
+ cin>>m;
+
+ for (j=0; j<n; j++)
+ {
+    suma2=suma2+tab[j][m-1];
+ }
+ cout<<"Suma "<<m <<" kolumny"; cout<<" wynosi: "<<suma2<<endl;
+}
+
+int main()
+{int tab[10][10], n, i ,j, k=0;
+ cout << "Podaj rozmiar boku macierzy NxN: ";
+ cin>>n;
+
+ for(i=0;i<n;i++)
+ {
+    for(j=0;j<n;j++)
+    {k=k+1;
+        cout<<"Liczba nr: "<< k<<endl;
+        cin>> tab[i][j];
+    }
+ }
+
+ cout<<endl;
+
+ for (i=0; i<n; i++)
+    {
+
+        for (j=0; j<n; j++)
+           {
+               cout<<tab[i][j];
+           }
+       cout<<endl;
+    }
+
+    sumakiw(tab,n);
+
+    return 0;
+}
