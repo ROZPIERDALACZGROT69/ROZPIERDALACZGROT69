@@ -2,77 +2,64 @@
 
 using namespace std;
 
+void wyswietl ( int tab [10][10],int n){
+for(int i=0;i<n;i++) {
+    for(int j=0;j<n;j++) {
+        cout.width( 3 ); cout<< tab[i][j];
+    } cout <<endl;
+  }
+return;}
+
 void sumakiw(int tab[10][10],int n){
- int i,j,l,m,suma1=0,suma2=0;
-
- cout<<endl;
- cout<<"Podaj kolumne do sumowania: ";
- cin>>l;
-
- for (i=0; i<n; i++)
- {
+ int l,m,suma1=0,suma2=0;
+ cout<<"Podaj kolumne do sumowania: "<<endl;  cin>>l;
+ for (int i=0; i<n; i++){
     suma1=suma1+tab[i][l-1];
  }
- cout<<"Suma "<<l; cout<<" wynosi: "<<suma1<<endl;
-
- cout<<"Podaj wiersze do sumowania: ";
- cin>>m;
-
- for (j=0; j<n; j++)
- {
-    suma2=suma2+tab[j][m-1];
- }
- cout<<"Suma "<<m <<" kolumny"; cout<<" wynosi: "<<suma2<<endl;
-}
+ cout<<"Suma wynosi: "<<suma1<<endl;
+ cout<<"Podaj wiersze do sumowania: "<<endl;  cin>>m;
+    for (int j=0; j<n; j++){
+    suma2=suma2+tab[m-1][j];
+    }
+ cout<<"Suma wierszu wynosi: "<<suma2<<endl;
+return;}
 
 void sumapod(int tab[10][10], int n){
- int i,j,sumam=0;
+ int suma=0,suma2=0,k=n;
+ for(int i=0;i<n;i++) {
+    for(int j=0;j<n;j++) {
+    if(j==k-1){  k--; suma=suma+tab[i][j]; cout <<tab[i][j]<<endl;}
+    }  }
+ cout<<"Suma ponizej przekatnej: "<<suma <<endl;
+ k=0;
+  for(int i=0;i<n;i++) {
+    for(int j=0;j<n;j++) {
+    if(j==k){ suma2=suma2+tab[j][i]; cout <<tab[i][j]<<endl;}
+    } k++;  }
+ cout<<"Suma powyzej przekatnej: "<<suma2 <<endl;
 
- for(i=0;i<n;i++)
- {
-    for(j=0;j<n;j++)
-    {
-        if(i<j)
-        {
-            sumam=sumam+tab[i][j];
-        }
-    }
- }
- cout<<endl;
- cout<<"Suma ponizej przekatnej: "<<sumam;
- cout<<endl;
 
-}
+
+
+
+return;}
+
 
 int main()
 {int tab[10][10], n, i ,j, k=0;
- cout << "Podaj rozmiar boku macierzy NxN: ";
+ cout << "Podaj rozmiar boku macierzy NxN: "<<endl;
  cin>>n;
 
- for(i=0;i<n;i++)
- {
-    for(j=0;j<n;j++)
-    {k=k+1;
-        cout<<"Liczba nr: "<< k<<endl;
+ for(i=0;i<n;i++) {
+    for(j=0;j<n;j++) {  k=k+1;
+        cout<<" Liczba nr: "<< k<<endl;
         cin>> tab[i][j];
     }
  }
 
- cout<<endl;
-
- for (i=0; i<n; i++)
-    {
-
-        for (j=0; j<n; j++)
-           {
-               cout<<tab[i][j];
-           }
-       cout<<endl;
-    }
-
+    wyswietl(tab,n);
     sumakiw(tab,n);
     sumapod(tab,n);
 
     return 0;
 }
-
