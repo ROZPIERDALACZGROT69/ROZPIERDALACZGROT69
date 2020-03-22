@@ -1,0 +1,83 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+void maximin(vector<int> tab){
+ int mini,maksi=0,i,a,b;
+
+ for(i=0; i<tab.size(); i++)
+    {
+     if (mini>tab[i]) {mini=tab[i]; a=i;}
+     if (tab[i]>maksi) {maksi=tab[i]; b=i;}
+    }
+ cout << endl;
+ cout << "Najmniejsza liczba: " << mini  <<"\n Indeks: " << a << endl;
+ cout << "Najwieksza liczba: " << maksi  <<"\n Indeks: " << b << endl;
+}
+
+void srednia(vector<int> tab){
+ int i;
+ double suma;
+
+ for(i=0;i<tab.size();i++)
+ {
+     suma+=tab[i];
+ }
+ cout<<endl;
+ cout<<"Srednia wartosc tablicy: "<<suma/tab.size()<<endl;
+
+}
+
+void szukanko(vector<int> tab){
+int wybor, pozycja;
+ cout<<endl;
+ cout << "Ktora pozycje chcesz zwrocic? ";
+ cin >> wybor;
+
+    wybor=wybor-1;
+    pozycja=tab[wybor];
+
+ cout<<"\n Wartosc pozycji: "<< pozycja <<endl;
+}
+
+int main()
+{
+vector<int> tab;
+
+  int liczby, wybor, n;
+    cout << "Ile elementow chcialbys podac?" << endl;
+    cin >> n;
+
+  for( int i=0; i<n; ++i )
+    {
+       cout<< "Podaj liczbe " <<i+1<<": ";
+       cin >> liczby;
+       tab.push_back(liczby);
+    }
+  for(int i = 0;i<tab.size();i++)
+    {
+        cout<<tab[i]<<endl;
+    }
+    cout<<endl;
+    cout<< "!----------------------------------!"<<endl;
+    cout<< "!MENU:                             !"<<endl;
+    cout<< "!----------------------------------!"<<endl;
+    cout<< "!1.Max i min element               !"<<endl;
+    cout<< "!2.Srednia podanych elementow      !"<<endl;
+    cout<< "!3.Znajdowanie pozycji elementu    !"<<endl;
+    cout<< "!----------------------------------!"<<endl;
+    cout<<endl;
+    cout<< "Wybierz: ";
+    cin>> wybor;
+
+    switch(wybor)
+    {
+  case 1: maximin(tab); break;
+  case 2: srednia(tab); break;
+  case 3: szukanko(tab); break;
+    }
+    cout<<endl;
+
+    return 0;
+}
