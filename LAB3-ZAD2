@@ -1,0 +1,124 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+void wyswietl(vector<vector<int> >&macierz1,vector<vector<int> > &macierz2 )
+{
+    int licznik=macierz1[0].size();
+
+    for (int i=0;i<licznik;i++)
+        {
+            for (int j=0;j<licznik;j++)
+            {
+                cout <<" ! "<< macierz1[i][j] <<" ! ";
+            }
+                cout << "     !     ";
+            for (int j=0;j<licznik;j++)
+                {
+                    cout <<" ! "<< macierz2[i][j] <<" ! ";
+                }
+           cout <<endl;
+}
+return ;}
+
+
+vector<vector<int> > wypelnianie(vector<vector<int> >&macierz1 )
+{
+    int a,ilosc=1;vector <int> wiersz;
+
+string user_2="n";
+
+    for (int i=0;i<ilosc;i++)
+        {
+            cout<<endl;
+            cout <<"Wiersz " << i+1<<endl;
+            cout<<endl;
+            macierz1.push_back(wiersz);
+     for (int j=0;j<ilosc;j++)
+         {
+             cout<<endl;
+             cout << "wprowadz Liczbe "; cin >> a;
+             cout<<endl;
+             macierz1[i].push_back(a);
+             if(i==1 && j==0)
+                ilosc=ilosc-1;
+             if(i==0)
+                {
+                    ilosc=macierz1[i].size()+1;
+                    cout<<endl;
+                    cout<<"Zakonczyc dodawanie liczb do tego wiersza? "; cin >>user_2;
+                    cout<<endl;
+
+                    if( user_2=="t")  break;
+                }
+          }
+    user_2="n";
+}
+return macierz1;}
+
+void dodawanie(vector<vector<int> > &macierz1 , vector<vector<int> > &macierz2)
+{
+    for (int i=0;i<macierz1.size();i++)
+        {
+            if (macierz1[i].size() != macierz2[i].size() )
+              {
+                  cout << "macierze nie sa rowne "<<endl;
+                  return;
+              }
+            for (int j=0;j<macierz1.size();j++)
+                {
+                    cout << "Suma macierzy "<<i; cout <<" "; cout <<j<<" wynosi "<< macierz1[i][j]+macierz2[i][j]<<endl;
+                }
+        }
+        wyswietl(macierz1,macierz2);
+return ;}
+
+void odejmowanie(vector<vector<int> > &macierz1 , vector<vector<int> > &macierz2)
+{
+    for (int i=0;i<macierz1.size();i++)
+        {
+            for (int j=0;j<macierz1.size();j++)
+            {
+                cout << "Wynik mnozenia macierzy "<<i; cout <<" "; cout <<j<<" wynosi "<< macierz1[i][j]-macierz2[i][j]<<endl;
+            }
+        }
+
+        wyswietl(macierz1,macierz2);
+return ;}
+
+int main (){
+
+vector<vector<int> > macierz1;
+vector<vector<int> > macierz2;
+
+int user=1; int a;
+
+while ( user != 0 ){
+        cout<<endl;
+    cout<<"!-------------------------!" <<endl;
+    cout<<"!1.Wpisywanie do macierzy !" <<endl;
+    cout<<"!2.Dodawanie              !" <<endl;
+    cout<<"!3.Odejmowanie            !" <<endl;
+    cout<<"!4.Mnozenie               !" <<endl;
+    cout<<"!5.Wyjscie                !" <<endl;
+    cout<<"!-------------------------!" <<endl;
+    cout<<endl;
+    cout<<"Wybor " <<endl; cin >>a;
+        cout<<endl;
+switch (a)
+    {
+        case 1 :
+             macierz1=wypelnianie(macierz1);
+             macierz2=wypelnianie(macierz2); break;
+        case 2 :
+            dodawanie(macierz1,macierz2);break;
+        case 3 :
+            odejmowanie(macierz1,macierz2); break;
+        /*case 4 :
+            mnozenie(macierz1,macierz2); break;*/
+        case 5 :
+            return 0; break;
+    }
+}
+return 0;}
