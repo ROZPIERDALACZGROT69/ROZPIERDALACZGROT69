@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstdlib>
-
+#include <string.h>
+#include <cstring>
 using namespace std;
 
  struct osoba{
@@ -10,62 +11,123 @@ char nazwisko[20];
 int wiek;
 };
 
+void sprawdzenie(osoba *tab,int n){int i,j,a;
+ for(j=0;j<n-1;j++)
+        {a=(&tab[0]+i)->imie[j];
+        if(a<64 || a>123){cout<<"Bledne wprowadzanie";}
+        }
+
+}
+
+
 void wypelnianie(int n,osoba *tab){
-    int i,j,a,b;
-    for (i=0; i<n; i++)
-    {
-     cout<< "Podaj id tosoba numer "<< i+1 << endl;
-     cin >> tab->id;
-  do{
+    int i,j,a,x;
+    for (i=0; i<n; i++){
+     tab->id=i+1;
+
      cout<< "Podaj imie tosoba numer " << i+1 << endl;
      cin >> tab->imie;
-     for(j=0;j<n-1;j++){a=(&tab[0]+j)->imie[j];}
-     }while(a>64 && a<123);
-     cout<< "Podaj nazwisko tosoba numer " << i+1 << endl;
+     x=strlen(tab->imie);
+        for(j=0;j<x;j++) {
+        a=tab->imie[j];
+        if(a<64 || a>123){ cout<<"Bledne wprowadzanie wpisz ponownie "; j=20; cin >> tab->imie;}
+        }
+ // cout<< "Podaj imie " << i+1 << endl;
+ // cin >> tab->imie;
+     cout<< "Podaj nazwisko " << i+1 << endl;
      cin>>tab->nazwisko;
-     do
-     {
-      cout<< "Podaj wiek tosoba numer " << i+1 << endl;
-      cin>> tab->wiek;
-      cin.clear(); //kasowanie flagi błędu strumienia
-      cin.sync();
-     }while(!(cin>>tab->wiek));
-*tab++;
-    }
-}
+    cout<< "Podaj wiek " << i+1 << endl;
+    cin>> tab->wiek;
+*tab++; }
+return;}
 
 void odczyt (int n,osoba *tab ){
   int i;
     for (i=0; i<n; i++)
         {
-         cout<<"Id: " << tab->id;
-         cout<<endl;
-         cout<<"Imie: " << tab->imie;
-         cout<<endl;
-         cout<<"Nazwisko: " << tab->nazwisko;
-         cout<<endl;
-         cout<<"Wiek: " << tab->wiek << endl;
+         cout.width( 10 ); cout<<"Id: " << tab->id;
+         cout.width( 21 ); cout<<"Imie: " << tab->imie;
+         cout.width( 21 ); cout<<"Nazwisko: " << tab->nazwisko;
+         cout.width( 10 ); cout<<"Wiek: " << tab->wiek << endl;
 *tab++;
         }
+return;}
+
+void szukanie(osoba *tab, int n){
+    int i;
+    string szukana;
+    cout<<"Podaj nazwisko osoby ktorej chcesz wyszukac ";
+    cin>> szukana;
+for (int i=0; i<n; i++){
+        if ( (&tab[0]+i)->nazwisko == szukana){
+cout <<"Miejsce w tablicy " << i << endl;
+cout <<"Nazwisko " << (&tab[0]+i)->nazwisko << endl;
+cout <<"Imie  " << (&tab[0]+i)->imie << endl;
+cout <<"Wiek " << (&tab[0]+i)->wiek << endl;
 }
+    }
+return; }
 
+void sortowanie (osoba *TAB,int n){  struct osoba tymczasowa;
+    int i,j,a,b;  char x[20];
+for (i=0;i<n;i++) {
+//a=(&TAB[0])->nazwisko[0]; b=(&TAB[0]+1)->nazwisko[0];
+ for (j=0;j<n-1;j++) {
+a=(&TAB[0]+j)->nazwisko[0]; b=(&TAB[0]+1+j)->nazwisko[0];
+    if ( a>b ) {
+      tymczasowa=*(&TAB[0]+1+j);
+     *(&TAB[0]+1+j)=*(&TAB[0]+j);
+     *(&TAB[0]+j)=tymczasowa;
+}
+   }
+ }
+return;}
 
+void usuwanie(osoba *tab, int n){
+    int i;
+    string szukana;
+    cout<<"Podaj nazwisko osoby ktora chcesz usunac ";
+    cin>> szukana;
 
+for (int i=0; i<n; i++){ struct osoba tymczasowa;
+        if ( (&tab[0]+i)->nazwisko == szukana){
+
+delete  (&tab[0]+i)->nazwisko;
+//delete  (&tab[0]+i)->imie;
+//delete  (&tab[0]+i)->id;
+//delete  (&tab[0]+i)->wiek;
+    }
+    }
+return; }
 
 
 int main(){
-    int n;
+    int n,a=0;
     cout << "Wprowadz N: "<<endl;
     cin >> n;
 
     osoba *tab = new osoba [n]  ;
     wypelnianie(n,tab);
     odczyt (n,tab);
-
-
+    sortowanie (tab,n);
+    while (a!=6){
+    cout.width( 25 );cout << "Szukanie osoby     - 1" << endl;
+    cout.width( 25 );cout << "Usuwanie osoby     - 2" << endl;
+    cout.width( 25 );cout << "Wypelnianie        - 3" << endl;
+    cout.width( 25 );cout << "Odczyt             - 4" << endl;
+    cout.width( 25 );cout << "Ponowne sortowanie - 5" << endl;
+    cout.width( 25 );cout << "Wyjscie         - 6"<<endl;
+    cin >> a;
+    while (a>6 || a<1 ){ cout << " bledna liczba " <<endl; cin >> a;}
+    switch (a){
+   case 1: szukanie(tab,n); break;
+   case 2: usuwanie(tab,n); break;
+   case 3: wypelnianie(n,tab); break;
+   case 4: odczyt (n,tab); break;
+   case 5: sortowanie (tab,n); break;
+    }}
     delete tab;
 
     return 0;
 }
-
 
