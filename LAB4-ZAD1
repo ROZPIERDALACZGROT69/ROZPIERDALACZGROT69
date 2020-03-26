@@ -1,0 +1,138 @@
+#include <iostream>
+
+using namespace std;
+
+void plansza(char p[])
+{
+  for(int i = 1; i <= 9; i++)
+  {
+    cout << " " << p[i] << " ";
+    if(i % 3)       cout << "|";
+    else if(i != 9) cout << "\n---+---+---\n";
+    else            cout << endl;
+  }
+}
+
+bool winer(char p[], char g, bool nic)
+{
+  bool test;
+  int i;
+
+  test = false;
+
+  for(i = 1; i <= 7; i += 3) test |= ((p[i] == g) && (p[i+1] == g) && (p[i+2] == g));
+
+
+  for(i = 1; i <= 3; i++)    test |= ((p[i] == g) && (p[i+3] == g) && (p[i+6] == g));
+
+
+  test |= ((p[1] == g) && (p[5] == g) && (p[9] == g));
+
+
+  test |= ((p[3] == g) && (p[5] == g) && (p[7] == g));
+
+  if(test)
+  {
+    if(!nic)
+    {
+      plansza(p);
+      cout << "\nGracz z symbolem: " << g << " wygral!\n\n";
+    }
+    return true;
+  }
+  return false;
+}
+
+
+bool remis(char p[], bool nic)
+{
+  for(int i = 1; i <= 9; i++) if(p[i] == ' ') return false;
+
+  if(!nic)
+  {
+    plansza(p); cout << "\nRemis! \n\n";
+  }
+  return true;
+}
+
+int minimax(char p[], char player)
+{
+  int m, mmx;
+
+  if(winer(p,player,true)) return (player == 'X') ? 1 : -1;
+
+  if(remis(p,true)) return 0;
+
+  player = (player == 'X') ? 'O' : 'X';
+
+  mmx = (player == 'O') ? 10 : -10;
+
+  for(int i = 1; i <= 9; i++)
+    if(p[i] == ' ')
+    {
+       p[i] = player;
+       m = minimax(p,player);
+       p[i] = ' ';
+       if(((player == 'O') && (m < mmx)) || ((player == 'X') && (m > mmx))) mmx = m;
+    }
+  return mmx;
+}
+
+int komputer(char p[])
+{
+  int ruch, i, m, mmx;
+
+  mmx = -10;
+  for(i = 1; i <= 9; i++)
+    if(p[i] == ' ')
+    {
+      p[i] = 'X';
+      m = minimax(p,'X');
+      p[i] = ' ';
+      if(m > mmx)
+      {
+        mmx = m; ruch = i;
+      }
+    }
+  return ruch;
+}
+
+void ruch(char p[], char &player)
+{
+  int r;
+
+  plansza(p);
+  if(player == 'O')
+  {
+    cout << "\nGraczu twoj ruch : ";
+    cin >> r;
+  }
+  else
+  {
+    r = komputer(p);
+    cout << "\nRuch komputera : " << r << endl;
+  }
+  cout << "---------------------------\n\n";
+  if((r >= 1) && (r <= 9) && (p[r] == ' ')) p[r] = player;
+  player = (player == 'O') ? 'X' : 'O';
+}
+
+main()
+{
+  char p[10],player,wybor;
+
+  do
+  {
+    cout << "Gra w Kolko i Krzyzyk dla gracza i komputera\n"
+            "============================================\n\n";
+    for(int i = 1; i <= 9; i++) p[i] = ' ';
+    player = 'O';
+
+    while(!winer(p,'X',false) && !winer(p,'O',false) && !remis(p,false)) ruch(p,player);
+
+    cout << "Jeszcze raz ? (T = TAK) : ";
+    cin >> wybor;
+    cout << "\n\n\n";
+
+  } while((wybor == 'T') || (wybor == 't'));
+}
