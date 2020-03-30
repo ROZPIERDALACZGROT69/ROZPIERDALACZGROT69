@@ -1,0 +1,192 @@
+#include <iostream>
+#include <windows.h>
+#include <fstream>
+
+using namespace std;
+struct lista
+{ string imie;
+string nazwisko;
+string PESEL;
+int wiek;
+lista *nast;
+};
+
+int rozmiar;
+int pocz;
+int kon;
+
+//------------------------------------------------------------------------
+
+void wyswietl_kolejke(lista *tab, int *pocz, int *kon)
+{
+    system("CLS");
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),12);
+
+    cout<<endl;
+    cout<<"-------------------"<<endl;
+    cout<<"ZAWARTOSC KOLEJKI: "<<endl;
+    cout<<"-------------------"<<endl;
+
+
+    if (rozmiar==0)
+    {
+        cout<<"pusta";
+    }
+
+    else
+    {
+
+
+        for (int i=0; i<rozmiar; i++)
+        {
+            if (*pocz+i>=5)
+            cout<<endl;
+          cout<<"Imie: " << (&tab[0]+i+*pocz)->imie<<endl;
+          cout<<"Nazwisko: " << (&tab[0]+i+*pocz)->nazwisko<<endl;
+          cout<<"PESEL: " << (&tab[0]+i+*pocz)->PESEL<<endl;
+          cout<<"Wiek: " << (&tab[0]+i+*pocz)->wiek << endl;
+          cout<<"----------------"<<endl;
+        }
+
+    }
+
+    cout<<endl<<"-------------------"<<endl<<endl;
+
+
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),11);
+}
+
+//------------------------------------------------------------------------
+
+void push(lista *tab, int *kon)
+{
+    if (rozmiar>=5)
+    {
+        cout << "Kolejka pelna!";
+        Sleep(1000);
+    }
+    else
+    {
+         cout<< "Podaj imie " << endl;
+         cin >> (&tab[0]+rozmiar+*kon)->imie;
+
+         cout<< "Podaj nazwisko " << endl;
+         cin >> (&tab[0]+rozmiar+*kon)->nazwisko;
+
+         cout<< "Podaj Pesel " << endl;
+         cin >> (&tab[0]+rozmiar+*kon)->PESEL;
+
+         cout<< "Podaj wiek "  << endl;
+         cin>> (&tab[0]+rozmiar+*kon)->wiek;
+        *kon=(*kon+1);
+        rozmiar=rozmiar+1;
+    }
+}
+
+//------------------------------------------------------------------------
+
+void pop(lista *tab, int *pocz)
+{
+    if (rozmiar==0)
+    {
+        cout<<"Kolejka jest pusta!";
+        Sleep(1000);
+    }
+    else
+    {
+        cout<<endl<<"POP - nastapi usuniecie z kolejki osoby: "<<(&tab[0]+rozmiar+*pocz)->nazwisko;
+        *pocz=(*pocz+1);
+        rozmiar=rozmiar-1;
+		Sleep(1000);
+
+    }
+
+
+}
+//------------------------------------------------------------------------
+
+void kasuj(lista *tab, int *pocz)
+{
+    if (rozmiar==0)
+    {
+        cout<<"Kolejka jest pusta!";
+        Sleep(1000);
+    }
+    else
+    {
+        cout<<endl<<"POP - nastapi usuniecie z kolejki";
+        *pocz=(*pocz+1);
+        rozmiar=0;
+		Sleep(1000);
+
+    }
+
+
+}
+
+void zapis(lista *tab,int *pocz){
+ fstream plik;
+
+    plik.open("baza.txt",ios::out);
+    if (rozmiar==0) {cout <<" Kolejka pusta- nie mozna zapisac pliku " <<endl; Sleep(3000); return;}
+
+    for (int i=rozmiar; i>=1; i--)
+    {
+          plik<<"Imie: " << (&tab[0]+i+*pocz)->imie<<endl;
+          plik<<"Nazwisko: " << (&tab[0]+i+*pocz)->nazwisko<<endl;
+          plik<<"PESEL: " << (&tab[0]+i+*pocz)->PESEL<<endl;
+          plik<<"Wiek: " << (&tab[0]+i+*pocz)->wiek << endl;
+    }
+
+      cout << "Udalo sie zapisac do pliku"<<endl; Sleep(1000); plik.close();
+return;}
+
+int main()
+{lista *tab = new lista [6];
+ int *pocz= new int;
+*pocz=0;
+ int *kon= new int;
+ *kon=0;
+
+    int wybor;
+    rozmiar=0;
+
+    do
+    {
+
+        wyswietl_kolejke(tab,pocz,kon);
+
+        cout << "MENU GLOWNE KOLEJKI:"<<endl;
+        cout << "------------------------------------------"<<endl;
+        cout << "1. Dodajwanie elementu na koniec kolejki "<<endl;
+        cout << "2. Usuwanie elementu z poczatku kolejki "<<endl;
+        cout << "3. Usuwanie calosci "<<endl;
+        cout << "4. Zapis z sortowaniem "<<endl;
+        cout << "5. Koniec programu "<<endl;
+        cout << "------------------------------------------"<<endl;
+        cout << "Wybor: ";
+        cin >> wybor;
+
+        switch (wybor)
+        {
+        case 1:
+            push(tab,kon);
+            break;
+
+        case 2:
+            pop(tab,pocz);
+            break;
+        case 3:
+            kasuj(tab,pocz);
+            break;
+        case 4:
+            zapis(tab,pocz);
+            break;
+
+        }
+
+    }
+    while (wybor != 5);
+
+    return 0;
+}
