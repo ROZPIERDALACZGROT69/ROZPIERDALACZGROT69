@@ -1,0 +1,132 @@
+#include <iostream>
+#include <windows.h>
+
+using namespace std;
+
+int lista[10];
+int rozmiar;
+
+struct lista
+{ string imie;
+string nazwisko;
+string PESEL;
+int wiek;
+lista *pop;
+};
+struct lista *pop = new lista [10]
+
+//------------------------------------------------------------------------
+
+void wyswietl_stos()
+{
+    system("CLS");
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),14);
+
+    cout<<endl;
+    cout<<"----------------"<<endl;
+    cout<<"ZAWARTOSC STOSU:"<<endl;
+    cout<<"----------------"<<endl;
+
+    for (int i=rozmiar; i>=1; i--)
+    {
+        cout<<lista[i]<<endl;
+    }
+
+    if (rozmiar==0) cout<<"pusty"<<endl;
+
+    cout << "----------------"<<endl<<endl;
+
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),15);
+}
+
+//------------------------------------------------------------------------
+
+void push()
+{
+    if (rozmiar>=10)
+    {
+        cout << "Stos pelny!";
+        Sleep(1000);
+    }
+    else
+    {
+
+        rozmiar=rozmiar+1;
+
+
+ cout<< "Podaj imie " << endl;
+ cin >> lista->imie;
+
+ cout<< "Podaj nazwisko " << endl;
+ cin >> lista->nazwisko;
+
+ cout<< "Podaj Pesel " << endl;
+ cin >> lista->PESEL;
+
+ cout<< "Podaj wiek "  << endl;
+ cin>> lista->wiek;
+
+*lista++;
+
+return;}
+
+//------------------------------------------------------------------------
+
+void pop()
+{
+    if (rozmiar>=1)
+    {
+        cout<<endl<<"POP - nastapi usuniecie ze stosu liczby: "<<lista[rozmiar];
+        Sleep(2000);
+
+        rozmiar=rozmiar-1;
+    }
+    else
+    {
+        cout << "Stos pusty!";
+        Sleep(1000);
+    }
+}
+//------------------------------------------------------------------------
+void size()
+{
+    cout<<endl<<"Liczba elementow na stosie: "<<rozmiar;
+    Sleep(2000);
+}
+
+int main()
+{
+
+    int wybor;
+    rozmiar=0;
+
+    do
+    {
+        wyswietl_stos();
+
+        cout << "MENU GLOWNE STOSU:"<<endl;
+        cout << "------------------------------------------"<<endl;
+        cout << "1. PUSH (dodaje element na szczyt stosu) "<<endl;
+        cout << "2. POP (usuwa element ze szczytu stosu) "<<endl;
+        cout << "4. Koniec programu "<<endl;
+        cout << "------------------------------------------"<<endl;
+        cout << "Wybor: ";
+        cin >> wybor;
+
+        switch (wybor)
+        {
+        case 1:
+            push();
+            break;
+
+        case 2:
+            pop();
+            break;
+
+        }
+
+    }
+    while (wybor != 4);
+
+    return 0;
+}
