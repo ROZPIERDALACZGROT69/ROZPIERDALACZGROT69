@@ -3,21 +3,23 @@
 
 using namespace std;
 
-int lista[10];
-int rozmiar;
+int lista[10];   // DLACZEGO ZMIENNA NAZYWAWALA SIE JA KSTRUKTURA SYPALO SIE
+int rozmiar;   // TYLKO NIE GLOBALNE XD
 
-struct lista
+struct strutkura
 { string imie;
 string nazwisko;
 string PESEL;
 int wiek;
-lista *pop;
+strutkura *pop;  // TO JEST WSKAZNIK  MI SIE WYDAJE BO GDZIES CZYTALEM ZE PRZY KASOWANIU DO NIEGO SIE WPISUJE WCZESNIEJ STRUKTURE NIE WIEM CZEMU TAK ZROBILEM XD
 };
-struct lista *pop = new lista [10]
+
 
 //------------------------------------------------------------------------
 
-void wyswietl_stos()
+void wyswietl_stos()   // DOPISZ SE  TABLICE ZNACZNIKOW NA STRUKTURE  TAK JAK NIZEJ
+                      // JAK TWORZYSZ  NOWA ZMIENNA  TO INICJUJESZ JA  BEZ STRUCT BO JUZ STWORZYLES WYZEJSTRUKTURE
+                     // CZYLI NAZWA TEJ STRUKTURY   W TYM PRZYPADKU STRUKTURA I TWORZYSZ ZMIENNA DUPA = NEW INT ZNACZNIKI I ILE [10]
 {
     system("CLS");
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),14);
@@ -41,7 +43,7 @@ void wyswietl_stos()
 
 //------------------------------------------------------------------------
 
-void push()
+void push(strutkura *dupa)
 {
     if (rozmiar>=10)
     {
@@ -55,31 +57,32 @@ void push()
 
 
  cout<< "Podaj imie " << endl;
- cin >> lista->imie;
+ cin >> dupa->imie;
 
  cout<< "Podaj nazwisko " << endl;
- cin >> lista->nazwisko;
+ cin >> dupa->nazwisko;
 
  cout<< "Podaj Pesel " << endl;
- cin >> lista->PESEL;
+ cin >> dupa->PESEL;
 
  cout<< "Podaj wiek "  << endl;
- cin>> lista->wiek;
-
-*lista++;
+ cin>> dupa->wiek;
+    }
+//*lista++;  // CO TO  CZEMU STRUKTURE PRZESUWASZ NIE WIEM CO TO  ZROB  ZNACZNIK W MAIN I PRZEKAZUJ W FUNKCJI
 
 return;}
 
+
 //------------------------------------------------------------------------
 
-void pop()
+void pop(strutkura *dupa)
 {
     if (rozmiar>=1)
     {
-        cout<<endl<<"POP - nastapi usuniecie ze stosu liczby: "<<lista[rozmiar];
+       // cout<<endl<<"POP - nastapi usuniecie ze stosu liczby: "<<lista[rozmiar];
         Sleep(2000);
 
-        rozmiar=rozmiar-1;
+       // rozmiar=rozmiar-1;
     }
     else
     {
@@ -94,8 +97,14 @@ void size()
     Sleep(2000);
 }
 
-int main()
+int main()  // STWORZ TUTAJ WSKAZNIK   POCZ= NEW INT  JAK W TYYC HPIERWSZYCH LISTACH I MUSISZ GO PRZEKAZYWAC JAK WSZYSTKO
+            //ALE NIE MSUISZ JUZ ZWRACAC BO SIE ZAPISUJE
+            // WIECEJ NIE PATRZYLEM MUSISZ OGARNAC TAKIE RZECZY BO SIE GUBISZ WE WSKAZNIKACH JAK CZGOS NIE WIESZ TO PYTAJ
+            // ALBO UCZ SIE Z PORADNIKOW  CO  DOKLADNIE POTRZEBUJESZ NP JAK ZADEKLAROWAC WSKAZNIK
+            // W TEN SPOSOB NAJLATWIEJ SIE JEST NAUCZYC
+            //NA KONIEC ZROB  FUNKCJE KTORA KASUJE WSKAZNIKI  OGARNALEM ZE TRZEBA ZROBIC PETLE OD KONCA  CZYLI OD ELEMENTU 9 KASUJESZ PO KOLEI
 {
+strutkura *dupa = new strutkura [10];
 
     int wybor;
     rozmiar=0;
@@ -116,11 +125,11 @@ int main()
         switch (wybor)
         {
         case 1:
-            push();
+            push(dupa);
             break;
 
         case 2:
-            pop();
+            pop(dupa);
             break;
 
         }
@@ -130,3 +139,23 @@ int main()
 
     return 0;
 }
+/*  TO MOJA FUNKCJA PLIKU
+void PLIK(lista *Nlista,int *pocz){string USER;
+    fstream plik;
+    cout <<"wyczyscic plik ze wczesniejszych danych ? t/n" <<endl; cin >>USER;
+    if (USER =="t"||USER =="tak") { plik.open("baza.txt",ios::trunc|ios::out);  }
+    else  plik.open("baza.txt",ios::out);
+    if (*pocz==0){cout <<" STOS PUSTY- nie mozna zapisac pliku " <<endl; Sleep(1000); return;}
+    int i=*pocz;
+    while (i>0){
+        plik<<(&Nlista[0]+i)->imie;        plik <<",";
+        plik<<(&Nlista[0]+i)->nazwisko;    plik <<",";
+        plik<<(&Nlista[0]+i)->PESEL;       plik <<",";
+        plik<<(&Nlista[0]+i)->wiek;        plik <<",";
+        plik <<endl;
+        i--;
+    }  cout << "Udalo sie zapisac do pliku"<<endl; Sleep(1000); plik.close();
+return;}
+*/
+
+
